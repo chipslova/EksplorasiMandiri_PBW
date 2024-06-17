@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suara Ke Text</title>
+</head>
+<body>
+    <br>
+    <textarea id = "result" rows="10" cols="90"></textarea> <br>
+    <button id = "start">Mulai</button>
+
+		<script>
+			var startButton = document.getElementById('start');
+			var resultElement = document.getElementById('result');
+
+			var recognition = new webkitSpeechRecognition();
+			recognition.lang = navigator.language;
+			recognition.interimResults = true;
+
+			startButton.addEventListener('click', () => { recognition.start(); });
+
+			recognition.addEventListener('result', (event) => {
+		 	const result = event.results[event.results.length - 1][0].transcript;
+		 	resultElement.textContent = result;
+	         });
+		</script>
+</body>
+</html>
